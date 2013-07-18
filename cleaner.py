@@ -37,12 +37,15 @@ def construct_link(cik):
     return link
 
 CIKs = csv.reader(open("CIK.csv", "rU"))
-start = time.clock()
+CIKs2 = []
 for i in CIKs:
+    CIKs2.append(i)
+start = time.clock()
+for i in CIKs2:
     print "Checking: "+str(i[0])
-    print str((CIKs.index(i)/len(CIKs))*100)+"% of CIKs checked..."
+    print str((CIKs2.index(i)/len(CIKs2))*100)+"% of CIKs checked..."
     curr = time.clock()
-    print "Estimated time remaining: "+str((curr-start/CIKs.index(i))*(len(CIKs)-CIKs.index(i)))
+    print "Estimated time remaining: "+str((curr-start/CIKs2.index(i))*(len(CIKs2)-CIKs2.index(i)))
     valid = True
     page = get_page(construct_link(i))
     for e in page:
