@@ -42,15 +42,18 @@ for i in CIKs:
     CIKs2.append(i)
 start = time.clock()
 for i in CIKs2:
+    curr = time.clock()
     print "Checking: "+str(i[0])
     print "*******************"
     print "*******************"
+    time_remaining_seconds = (((curr-start)/(CIKs2.index(i)+1))*(len(CIKs2)-(CIKs2.index(i)+1)))
+    time_remaining_hours = (((((curr-start)/(CIKs2.index(i)+1))*(len(CIKs2)-(CIKs2.index(i)+1)))/60)/60)
+    est_completed = ((curr-start)/(time_remaining_seconds))*100
     print str(CIKs2.index(i)+1)+" of "+str(len(CIKs2))+" CIKs checked..."
-    print str(float(((CIKs2.index(i)+1)/len(CIKs2))*100))+"% of CIKs checked..."
-    curr = time.clock()
+    print str(est_completed)+"% of CIKs checked..."
     print "*******************"
     print "*******************"
-    print "Estimated time remaining: "+str(((((curr-start)/(CIKs2.index(i)+1))*(len(CIKs2)-(CIKs2.index(i)+1)))/60)/60)+" hours"
+    print "Estimated time remaining: "+str(time_remaining_hours)+" hours"
     valid = True
     page = get_page(construct_link(i))
     for e in page:
@@ -69,8 +72,12 @@ for i in CIKs2:
                 for o in range(0,5):
                     new = page[position+1]
                     if '<td>' in new:
-                        year = new.split('-')[0]
-                        year = year.split('>')[1]
+                        if '-' in new:
+                            year = new.split('-')[0]
+                            year = year.split('>')[1]
+                        else:
+                            year = new.split('>')[1]
+                            year = year[:4]
                         if int(year) >= 2012:
                             current.append(i)
                             master.append(i)
