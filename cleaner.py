@@ -43,9 +43,9 @@ for i in CIKs:
 start = time.clock()
 for i in CIKs2:
     print "Checking: "+str(i[0])
-    print str((CIKs2.index(i)/len(CIKs2))*100)+"% of CIKs checked..."
+    print str(((CIKs2.index(i)+1)/len(CIKs2))*100)+"% of CIKs checked..."
     curr = time.clock()
-    print "Estimated time remaining: "+str((curr-start/CIKs2.index(i))*(len(CIKs2)-CIKs2.index(i)))
+    print "Estimated time remaining: "+str((curr-start/(CIKs2.index(i)+1))*(len(CIKs2)-(CIKs2.index(i)+1)))
     valid = True
     page = get_page(construct_link(i))
     for e in page:
