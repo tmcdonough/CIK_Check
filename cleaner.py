@@ -49,7 +49,7 @@ for i in CIKs:
         if "No matching CIK." in e:
             #rejected.append(i)
             valid = False
-            print "     "+str(i[0])+" is invalid ("+str(len(rejected))+" total rejected)"
+            print "     "+str(i[0])+" is invalid"
             break
         else:
             continue
